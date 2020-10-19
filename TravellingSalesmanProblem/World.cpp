@@ -5,10 +5,12 @@
 World::World(int xNumberOfPoints)
 {
 	this->numberOfPoints = xNumberOfPoints;
-	pathWeights = new double* [numberOfPoints];
+	pathWeights = new int* [numberOfPoints];
 
 	for (int i = 0; i < numberOfPoints; i++)
 	{
-			pathWeights[i] = new double[numberOfPoints];
+			pathWeights[i] = new int[numberOfPoints];
 	}
+
+	this->generator();
 }
