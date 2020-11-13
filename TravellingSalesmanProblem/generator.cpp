@@ -1,32 +1,28 @@
 #include"World.h"
-#include<cstdlib>
-#include<ctime>
-#include<stdio.h>
 
 void World::generator()
 {
 	srand(time(0));
+	int tempX, tempY;
+	std::ofstream outputFile;
+	std::string outputFileNameS;
+
+	std::cout << "Provide output file name:" << std::endl;
+	std::cin >> outputFileNameS;
 	
-	for (int i = 0; i < this->numberOfPoints; i++)
-	{
-		for (int j = 0; j < this->numberOfPoints; j++)
-		{
-			this->pathWeights[i][j] = 0;
-		}
-	}
+	outputFile.open(outputFileNameS);
+	outputFile << numberOfPoints << std::endl;
 
+	this->createPointsMatrix();
 
 	for (int i = 0; i < this->numberOfPoints; i++)
 	{
-		for (int j = i; j < this->numberOfPoints; j++)
-		{
-			if (i != j)
-			{
-				this->pathWeights[i][j] = rand() % 10 + 1;
-				this->pathWeights[j][i] = this->pathWeights[i][j];
-			}
+		tempX = rand() % 500;
+		tempY = rand() % 500;
+		this->pointsMatrix[i].setCoordinates(tempX, tempY);
 
-		}
-
+		outputFile << i+1 << " " << tempX << " " << " " << tempY << std::endl;
 	}
+
+	outputFile.close();
 }

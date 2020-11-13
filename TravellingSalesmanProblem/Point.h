@@ -3,15 +3,15 @@ class Point
 {
 private:
 
-	double x;
-	double y;
+	int x;
+	int y;
 
 public:
-	int pointID;
-	void setCoordinates(double xX, double yY);
+	void setCoordinates(int xX, int yY);
 	double p2pDistance(Point A);
 
-	Point(int xPointID, double xX, double yY);
-
+	Point();
+	Point(int xX, int yY);
+	~Point();
 };
 

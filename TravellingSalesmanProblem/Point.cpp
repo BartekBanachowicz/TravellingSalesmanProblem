@@ -3,15 +3,25 @@
 
 
 	
-Point::Point(int xPointID, double xX, double yY)
+Point::Point(int xX, int yY)
 {
 	this->x = xX;
 	this->y = yY;
-	this->pointID = xPointID;
+}
+
+Point::Point()
+{
+	this->x = 0;
+	this->y = 0;
+}
+
+Point::~Point()
+{
+
 }
 
 	
-void Point::setCoordinates(double xX, double yY)
+void Point::setCoordinates(int xX, int yY)
 {
 	this->x = xX;
 	this->y = yY;

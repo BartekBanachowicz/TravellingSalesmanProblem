@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="generator.cpp" />
     <ClCompile Include="greedyPathFinder.cpp" />
+    <ClCompile Include="reader.cpp" />
     <ClCompile Include="World.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="TravellingSalesmanProblem.cpp" />
