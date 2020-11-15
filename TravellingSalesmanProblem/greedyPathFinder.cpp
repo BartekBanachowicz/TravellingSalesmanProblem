@@ -1,29 +1,39 @@
-#include"World.h"
+#include "World.h"
 #include <iostream>
 #include <limits>
 
 void World::greedyPathFinder()
 {
+	std::cout << "Greedy path found:\n";
 
-	/*int start = 0, head = start;
+	int start = 0, head = start;
+	int minID = start;
+	double min = DBL_MAX, distance, distanceTotal = 0;
+
 	for (int i = 0; i < this->numberOfPoints; i++) 
-	{
-		int minID = start;
-		double min = DBL_MAX;
-		std::cout << start << "\t";
+	{	
+		this->pointsMatrix[start].visit();		
+		distance = 0;
+		std::cout << start + 1 <<"\t";
+
 		for (int j = 0; j < this->numberOfPoints; j++) 
 		{
-			if (this->distanceMatrix[start][j] > -1 && this->distanceMatrix[start][j] < min) 
+			if (!this->pointsMatrix[j].ifVisited()) 
 			{
-				minID = j;
-				min = this->distanceMatrix[start][j];
+				distance = this->pointsMatrix[start].p2pDistance(this->pointsMatrix[j]);
+				if (distance < min) {
+					minID = j;
+					min = distance;
+				}
 			}
 		}
-		for (int j = 0; j < this->numberOfPoints; j++) 
-		{
-			this->distanceMatrix[j][start] = -1;
-		}
+		this->pointsMatrix[minID].visit();
+		distanceTotal += distance;
 		start = minID;
+		min = DBL_MAX;
 	}
-	std::cout << head << std::endl;*/
+	std::cout << head + 1 << std::endl;
+	distanceTotal += this->pointsMatrix[minID].p2pDistance(this->pointsMatrix[head]);
+	std::cout << "Distance total: " << distanceTotal << std::endl;
+
 }

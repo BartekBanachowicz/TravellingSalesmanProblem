@@ -6,6 +6,7 @@ World::World(int xNumberOfPoints)
 {
 	this->numberOfPoints = xNumberOfPoints;
 	this->generator();
+	this->greedyPathFinder();
 }
 
 World::World(std::string fileName)
