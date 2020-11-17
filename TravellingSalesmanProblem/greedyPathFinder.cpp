@@ -14,7 +14,7 @@ void World::greedyPathFinder()
 		int minID = start;
 		double min = DBL_MAX, distance, distanceTotal = 0;
 
-		for (int i = 0; i < this->numberOfPoints; i++)
+		for (int i = 0; i < this->numberOfPoints - 1; i++)
 		{
 			this->pointsMatrix[start].visit();
 			distance = 0;
@@ -25,6 +25,7 @@ void World::greedyPathFinder()
 				if (!this->pointsMatrix[j].ifVisited())
 				{
 					distance = this->pointsMatrix[start].p2pDistance(this->pointsMatrix[j]);
+					//std::cout << start + 1 << " -> " << j + 1 << ": " << distance << std::endl;
 					if (distance < min) {
 						minID = j;
 						min = distance;
@@ -32,13 +33,14 @@ void World::greedyPathFinder()
 				}
 			}
 			this->pointsMatrix[minID].visit();
-			distanceTotal += distance;
+			distanceTotal += min;
 			start = minID;
 			min = DBL_MAX;
 		}
-		std::cout << head + 1 << std::endl;
+		std::cout << minID + 1 << "\t" << head + 1 << std::endl;		
 		distanceTotal += this->pointsMatrix[minID].p2pDistance(this->pointsMatrix[head]);
 		std::cout << "Distance total: " << distanceTotal << std::endl << std::endl;
+
 		if (distanceTotal < shortestTotal)
 			shortestTotal = distanceTotal;
 
