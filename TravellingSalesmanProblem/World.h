@@ -19,6 +19,7 @@ public:
 	void reader(std::string fileName);
 	void greedyPathFinder();
 	void createPointsMatrix();
+	void readWorld();
 
 private:
 	int numberOfPoints;

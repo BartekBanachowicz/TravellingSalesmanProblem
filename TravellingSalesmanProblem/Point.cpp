@@ -3,7 +3,7 @@
 
 
 	
-Point::Point(int xX, int yY)
+Point::Point(double xX, double yY)
 {
 	this->x = xX;
 	this->y = yY;
@@ -23,7 +23,7 @@ Point::~Point()
 }
 
 	
-void Point::setCoordinates(int xX, int yY)
+void Point::setCoordinates(double xX, double yY)
 {
 	this->x = xX;
 	this->y = yY;
@@ -49,3 +49,12 @@ bool Point::ifVisited()
 	return this->visited;
 }
 
+double Point::readCoordinatesX()
+{
+	return this->x;
+}
+
+double Point::readCoordinatesY()
+{
+	return this->y;
+}

@@ -3,19 +3,21 @@ class Point
 {
 private:
 
-	int x;
-	int y;
+	double x;
+	double y;
 	bool visited;
 
 public:
-	void setCoordinates(int xX, int yY);
+	void setCoordinates(double xX, double yY);
 	double p2pDistance(Point A);
+	double readCoordinatesX();
+	double readCoordinatesY();
 	void visit();
 	void resetVisited();
 	bool ifVisited();
 
 	Point();
-	Point(int xX, int yY);
+	Point(double xX, double yY);
 	~Point();
 };
 
