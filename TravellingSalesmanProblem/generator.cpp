@@ -21,7 +21,7 @@ void World::generator()
 		tempY = rand() % 500;
 		this->pointsMatrix[i].setCoordinates(tempX, tempY);
 
-		outputFile << i+1 << " " << tempX << " " << " " << tempY << std::endl;
+		outputFile << i+1 << " " << tempX << " " << tempY << std::endl;
 	}
 
 	outputFile.close();

@@ -6,7 +6,7 @@
 int main()
 {
     std::cout << "Welcome in TSP\n";
-    //World firstWorld(4);
-    World firstWorld("berlin.txt");
+    World firstWorld(50);
+    //World firstWorld("bier127.txt");
     //firstWorld.greedyPathFinder();
 }
