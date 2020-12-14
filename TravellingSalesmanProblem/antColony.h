@@ -15,5 +15,9 @@ public:
 
 	AntColony(int xNumberOfAnts, int xNumberOfPoints);
 	void antsSpawning(int xNumberOfPoints, Point* pointsMatrix);
+	int decisionMaking(int antID, int xNumberOfPoints, Point* pointsMatrix);
+	double getPheromone(int x, int y);
+	int getNumberOfAnts();
+	void makeMove(int antID, int xNumberOfPoints, Point* pointsMatrix);
 
 };
