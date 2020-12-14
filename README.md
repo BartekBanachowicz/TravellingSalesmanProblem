@@ -3,3 +3,6 @@ Console program to solve Travelling Salesman Problem [TSP] in many ways (e.g. wi
 
 # Ideas and concepts
 https://docs.google.com/document/d/134Mgdu-1jhy5j6ekkk41sfShLviOmpowSxJrooJKHCA/edit?usp=sharing
+
+# Atricle
+http://people.idsia.ch/~luca/acs-bio97.pdf
