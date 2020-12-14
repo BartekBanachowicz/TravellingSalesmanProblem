@@ -33,6 +33,15 @@
     <ClCompile Include="reader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="antColony.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="antPathFinder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Point.h">
@@ -42,6 +51,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="antColony.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

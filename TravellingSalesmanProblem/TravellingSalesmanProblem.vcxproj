@@ -139,6 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ant.cpp" />
+    <ClCompile Include="antColony.cpp" />
+    <ClCompile Include="antPathFinder.cpp" />
     <ClCompile Include="generator.cpp" />
     <ClCompile Include="greedyPathFinder.cpp" />
     <ClCompile Include="reader.cpp" />
@@ -147,6 +150,8 @@
     <ClCompile Include="TravellingSalesmanProblem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ant.h" />
+    <ClInclude Include="antColony.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="World.h" />
     <ClInclude Include="Point.h" />

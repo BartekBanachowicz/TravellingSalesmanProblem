@@ -1,12 +1,11 @@
 #include "World.h"
-#include "Point.h"
 
 
 World::World(int xNumberOfPoints)
 {
 	this->numberOfPoints = xNumberOfPoints;
 	this->generator();
-	this->greedyPathFinder();
+	//this->greedyPathFinder();
 }
 
 World::World(std::string fileName)
@@ -14,7 +13,7 @@ World::World(std::string fileName)
 	this->reader(fileName);
 	std::cout << "Poprawnie utworzono swiat" << std::endl;
 	this->readWorld();
-	this->greedyPathFinder();
+	//this->greedyPathFinder();
 }
 
 World::~World()
@@ -35,4 +34,9 @@ void World::readWorld()
 		std::cout << i + 1 << " " << this->pointsMatrix[i].readCoordinatesX() << " " << this->pointsMatrix[i].readCoordinatesY() << std::endl;
 	}
 	std::cout << "-----\n";
+}
+
+int World::readNumberOfPoints()
+{
+	return this->numberOfPoints;
 }

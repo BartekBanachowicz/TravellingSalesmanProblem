@@ -1,5 +1,6 @@
 #pragma once
 #include"Point.h"
+#include"antColony.h"
 #include<cstdlib>
 #include<ctime>
 #include<stdio.h>
@@ -18,8 +19,10 @@ public:
 	void generator();
 	void reader(std::string fileName);
 	void greedyPathFinder();
+	void antPathFinder();
 	void createPointsMatrix();
 	void readWorld();
+	int readNumberOfPoints();
 
 private:
 	int numberOfPoints;
