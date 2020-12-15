@@ -166,6 +166,9 @@ int AntColony::decisionMaking(int antID, int xNumberOfPoints, Point *pointsMatri
 
 	//std::cout << " --> " << newPlaceID << std::endl;
 
+	delete[] attractivenessArray;
+	delete[] probabilityArray;
+
 	return newPlaceID;
 }
 
@@ -193,21 +196,21 @@ void AntColony::globalUpdate(int antID, double pathLenght, int xNumberOfPoints)
 	double tempPheromone = 0;
 	double alpha = 0.1;
 	
-	std::cout << "\n\nStartPoint: "<<this->colony[antID].startPointID<<" Kolejnosc: ";
+	//std::cout << "\n\nStartPoint: "<<this->colony[antID].startPointID<<" Kolejnosc: ";
 	for (int i = 0; i < xNumberOfPoints; i++)
 	{
-		std::cout<<i<<":"<<this->colony[antID].getAntPath(i)<<"  ";
+		//std::cout<<i<<":"<<this->colony[antID].getAntPath(i)<<"  ";
 		
 		path[this->colony[antID].getAntPath(i) - 1] = i;
 	}
 
 	path[0] = this->colony[antID].startPointID;
 
-	std::cout << "\n\nKroki: ";
+	/*std::cout << "\n\nKroki: ";
 	for (int i = 0; i < xNumberOfPoints; i++)
 	{
 		std::cout << path[i] << " ";
-	}
+	}*/
 
 	for (int i = 1; i < xNumberOfPoints; i++)
 	{

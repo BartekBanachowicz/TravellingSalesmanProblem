@@ -3,7 +3,7 @@
 void World::antPathFinder()
 {
 	int temp = 1 * this->numberOfPoints;
-	double minimum = DBL_MAX;
+	double minimum = DBL_MAX, globalMinimum = DBL_MAX;
 	int minimumID = -1;
 
 
@@ -27,7 +27,7 @@ void World::antPathFinder()
 
 		for (int j = 0; j < myColony.getNumberOfAnts(); j++)
 		{
-			std::cout << "\nDistance mrowka " << j << ": " << myColony.getDistance(j);
+			//std::cout << "\nDistance mrowka " << j << ": " << myColony.getDistance(j);
 			
 			if (myColony.getDistance(j) < minimum)
 			{
@@ -36,12 +36,19 @@ void World::antPathFinder()
 			}
 		}
 
-		std::cout << "\nShortest path: " << minimum << " for ant: " << minimumID << std::endl;
+		//std::cout << "\nShortest path: " << minimum << " for ant: " << minimumID << std::endl;
+
+		if (minimum < globalMinimum)
+		{
+			globalMinimum = minimum;
+		}
 
 		myColony.globalUpdate(minimumID, minimum, numberOfPoints);
 		myColony.cleaning(this->numberOfPoints);
 
 	}
+
+	std::cout << "\n\nGlobal minimum: " << globalMinimum << std::endl;
 
 }
 
