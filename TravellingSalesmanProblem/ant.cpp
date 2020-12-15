@@ -4,6 +4,7 @@
 Ant::Ant(int xNumberOfPoints)
 {
 	currentPosition = nullptr;
+	currentStage = 1;
 	currentPositionID = -2;
 	startPointID = -2;
 	distance = 0;

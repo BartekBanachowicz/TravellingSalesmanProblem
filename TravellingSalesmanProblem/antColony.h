@@ -20,5 +20,7 @@ public:
 	int getNumberOfAnts();
 	void makeMove(int antID, int xNumberOfPoints, Point* pointsMatrix);
 	double getDistance(int antID);
+	void globalUpdate(int antID, double pathLenght, int xNumberOfPoints);
+	void cleaning(int xNumberOfPoints);
 
 };
