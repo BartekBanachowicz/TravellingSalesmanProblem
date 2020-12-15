@@ -7,8 +7,9 @@
 int main()
 {
     std::cout << "Welcome in TSP\n";
-    World firstWorld(10);
-    //World firstWorld("bier127.txt");
+    //World firstWorld(10);
+    World firstWorld("testOK.txt");
+    firstWorld.greedyPathFinder();
     firstWorld.antPathFinder();
     //firstWorld.greedyPathFinder();
 }

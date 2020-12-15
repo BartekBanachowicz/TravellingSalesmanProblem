@@ -41,6 +41,7 @@ void AntColony::antsSpawning(int xNumberOfPoints, Point* pointsMatrix)
 			this->colony[antPointer].currentPosition = &pointsMatrix[pointsPointer];
 			this->colony[antPointer].antPath[pointsPointer] = this->colony[antPointer].currentStage;
 			this->colony[antPointer].currentPositionID = pointsPointer;
+			this->colony[antPointer].startPointID = pointsPointer;
 			std::cout << colony[antPointer].currentPosition->readCoordinatesX() << " " << colony[antPointer].currentPosition->readCoordinatesY() << std::endl;
 			antPointer++;
 		}
@@ -73,6 +74,7 @@ int AntColony::decisionMaking(int antID, int xNumberOfPoints, Point *pointsMatri
 	double attractivenessSum = 0;
 	double probability;
 	int pointer = 0;
+	bool finalStep = true;
 
 
 	for (int i = 0; i < xNumberOfPoints; i++)
@@ -83,8 +85,9 @@ int AntColony::decisionMaking(int antID, int xNumberOfPoints, Point *pointsMatri
 			tempValue = this->getPheromone(this->colony[antID].currentPositionID, i) * (1 / this->colony[antID].currentPosition->p2pDistance(pointsMatrix[i]));
 			//ToDO - Add beta parameter
 
-			std::cout << "Wykonano\n";
+			//std::cout << "Wykonano\n";
 			attractivenessArray[i] = tempValue;
+			if (tempValue != 0) finalStep = false;
 		}
 		else
 		{
@@ -92,12 +95,12 @@ int AntColony::decisionMaking(int antID, int xNumberOfPoints, Point *pointsMatri
 		}
 	}
 
-	std::cout << "Mrowka " << antID << ": ";
-	for(int i=0; i < xNumberOfPoints; i++) std::cout << attractivenessArray[i] <<" ";
+	//std::cout << "Mrowka " << antID << ": ";
+	//for(int i=0; i < xNumberOfPoints; i++) std::cout << attractivenessArray[i] <<" ";
 
 	q = rand() % 100;
 
-	if (q <= q0)
+	if ((q <= q0) && !finalStep)
 	{
 		max = 0;
 		for (int i = 0; i < xNumberOfPoints; i++)
@@ -111,7 +114,7 @@ int AntColony::decisionMaking(int antID, int xNumberOfPoints, Point *pointsMatri
 
 		newPlaceID = maxID;
 	}
-	else
+	else if(!finalStep)
 	{
 		attractivenessSum = 0;
 		for (int i = 0; i < xNumberOfPoints; i++)
@@ -144,12 +147,16 @@ int AntColony::decisionMaking(int antID, int xNumberOfPoints, Point *pointsMatri
 				else
 				{
 					newPlaceID = pointer;
-					break;
+					break; 
 				}
 			}
 		}
 		
 
+	}
+	else
+	{
+		newPlaceID = this->colony[antID].startPointID;
 	}
 
 	if (newPlaceID == -1)
@@ -157,7 +164,7 @@ int AntColony::decisionMaking(int antID, int xNumberOfPoints, Point *pointsMatri
 		std::cout << "Error_decisionMaking\n";
 	}
 
-	std::cout << " --> " << newPlaceID << std::endl;
+	//std::cout << " --> " << newPlaceID << std::endl;
 
 	return newPlaceID;
 }
@@ -171,4 +178,9 @@ void AntColony::makeMove(int antID, int xNumberOfPoints, Point* pointsMatrix)
 {
 	int newPlaceID = decisionMaking(antID, xNumberOfPoints, pointsMatrix);
 	this->colony[antID].move(&pointsMatrix[newPlaceID], newPlaceID, this->pheromoneMatrix);
+}
+
+double AntColony::getDistance(int antID)
+{
+	return this->colony[antID].distance;
 }

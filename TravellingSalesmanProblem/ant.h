@@ -14,5 +14,7 @@ public:
 	int currentStage = 1;
 	int currentPositionID;
 	int getAntPath(int ID);
+	int startPointID;
+	double distance;
 
 };

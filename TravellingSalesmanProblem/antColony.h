@@ -19,5 +19,6 @@ public:
 	double getPheromone(int x, int y);
 	int getNumberOfAnts();
 	void makeMove(int antID, int xNumberOfPoints, Point* pointsMatrix);
+	double getDistance(int antID);
 
 };

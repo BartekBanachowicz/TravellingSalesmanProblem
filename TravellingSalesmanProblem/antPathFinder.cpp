@@ -2,7 +2,7 @@
 
 void World::antPathFinder()
 {
-	int temp = 5 * this->numberOfPoints;
+	int temp = 1 * this->numberOfPoints;
 
 
 	AntColony myColony(temp, this->numberOfPoints);
@@ -16,6 +16,11 @@ void World::antPathFinder()
 			{
 				myColony.makeMove(k, this->numberOfPoints, this->pointsMatrix);
 			}
+		}
+
+		for (int j = 0; j < myColony.getNumberOfAnts(); j++)
+		{
+			std::cout << "\nDistance mrowka " << j << ": " << myColony.getDistance(j);
 		}
 
 	}

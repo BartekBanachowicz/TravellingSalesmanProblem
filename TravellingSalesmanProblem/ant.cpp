@@ -5,6 +5,8 @@ Ant::Ant(int xNumberOfPoints)
 {
 	currentPosition = nullptr;
 	currentPositionID = -2;
+	startPointID = -2;
+	distance = 0;
 	antPath = new int[xNumberOfPoints];
 	for (int i = 0; i < xNumberOfPoints; i++)
 	{
@@ -16,6 +18,7 @@ Ant::Ant(int xNumberOfPoints)
 Ant::Ant()
 {
 	currentPosition = nullptr;
+	distance = 0;
 }
 
 void Ant::move(Point* newPlace, int newPlaceID, double** pheromoneMatrix)
@@ -23,6 +26,8 @@ void Ant::move(Point* newPlace, int newPlaceID, double** pheromoneMatrix)
 	double Tau0 = 1.0;
 	double alpha = 0.1;
 	double newPheromone;
+
+	this->distance += this->currentPosition->p2pDistance(*newPlace);
 
 	this->currentPosition = newPlace;
 	this->currentStage++;

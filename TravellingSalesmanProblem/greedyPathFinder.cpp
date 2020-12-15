@@ -7,8 +7,8 @@ void World::greedyPathFinder()
 	double shortestTotal = DBL_MAX;
 	for (int h = 0; h < this->numberOfPoints; h++)
 	{
-		std::cout << "\nStarting with point no " << h + 1 << std::endl;
-		std::cout << "Greedy path found:\n";
+		//std::cout << "\nStarting with point no " << h + 1 << std::endl;
+		//std::cout << "Greedy path found:\n";
 
 		int start = h, head = start;
 		int minID = start;
@@ -18,7 +18,7 @@ void World::greedyPathFinder()
 		{
 			this->pointsMatrix[start].visit();
 			distance = 0;
-			std::cout << start + 1 << "\t";
+			//std::cout << start + 1 << "\t";
 
 			for (int j = 0; j < this->numberOfPoints; j++)
 			{
@@ -37,9 +37,9 @@ void World::greedyPathFinder()
 			start = minID;
 			min = DBL_MAX;
 		}
-		std::cout << minID + 1 << "\t" << head + 1 << std::endl;		
+		//std::cout << minID + 1 << "\t" << head + 1 << std::endl;		
 		distanceTotal += this->pointsMatrix[minID].p2pDistance(this->pointsMatrix[head]);
-		std::cout << "Distance total: " << distanceTotal << std::endl << std::endl;
+		//std::cout << "Distance total: " << distanceTotal << std::endl << std::endl;
 
 		if (distanceTotal < shortestTotal)
 			shortestTotal = distanceTotal;
