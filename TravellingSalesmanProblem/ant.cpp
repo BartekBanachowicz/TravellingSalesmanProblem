@@ -35,9 +35,9 @@ void Ant::move(Point* newPlace, int newPlaceID, double** pheromoneMatrix)
 	this->antPath[newPlaceID] = this->currentStage;
 	
 
-	newPheromone = ((1 - alpha) * pheromoneMatrix[this->currentPositionID][newPlaceID]) + (alpha * Tau0);
+	/*newPheromone = ((1 - alpha) * pheromoneMatrix[this->currentPositionID][newPlaceID]) + (alpha * Tau0);
 	pheromoneMatrix[this->currentPositionID][newPlaceID] = newPheromone;
-	pheromoneMatrix[newPlaceID][this->currentPositionID] = newPheromone;
+	pheromoneMatrix[newPlaceID][this->currentPositionID] = newPheromone;*/
 
 
 	this->currentPositionID = newPlaceID;
