@@ -1,28 +1,16 @@
 #include"World.h"
-#include<chrono>
 
 void World::antPathFinder()
 {
+	int temp = 1 * this->numberOfPoints;
 	double minimum = DBL_MAX, globalMinimum = DBL_MAX;
 	int minimumID = -1;
 
-	//Parameters
-	int numberOfAnts = 20;
-	double alpha = 0.1;
-	int beta = 2;
-	int numberOfIterations = 20;
 
-	double max_time = 110.0;
-
-	AntColony myColony(numberOfAnts, this->numberOfPoints);
+	AntColony myColony(temp, this->numberOfPoints);
 	myColony.antsSpawning(this->numberOfPoints, this->pointsMatrix);
 
-	std::chrono::duration<double> elapsed;
-	double time = 0;
-	auto finish = std::chrono::high_resolution_clock::now();
-	auto start = std::chrono::high_resolution_clock::now();
-
-	for (int i = 0; i < numberOfIterations; i++)
+	for (int i = 0; i < 20; i++)
 	{
 		
 		minimum = DBL_MAX;
@@ -33,7 +21,7 @@ void World::antPathFinder()
 		{
 			for (int k = 0; k < myColony.getNumberOfAnts(); k++)
 			{
-				myColony.makeMove(k, this->numberOfPoints, this->pointsMatrix, beta, q0);
+				myColony.makeMove(k, this->numberOfPoints, this->pointsMatrix);
 			}
 		}
 
@@ -55,25 +43,12 @@ void World::antPathFinder()
 			globalMinimum = minimum;
 		}
 
-		myColony.globalUpdate(minimumID, minimum, numberOfPoints, alpha, tau_0, 0.15);
+		myColony.globalUpdate(minimumID, minimum, numberOfPoints);
 		myColony.cleaning(this->numberOfPoints);
 
-
-		if (i == 0)
-		{
-			finish = std::chrono::high_resolution_clock::now();
-			elapsed = finish - start;
-			time = elapsed.count();
-
-			numberOfIterations = int(max_time / time);
-		}
 	}
 
-	finish = std::chrono::high_resolution_clock::now();
-	elapsed = finish - start;
-	time = elapsed.count();
-
-	std::cout << "\n\nGlobal minimum: " << globalMinimum << "  Czas: "<<time<<std::endl;
+	std::cout << "\n\nGlobal minimum: " << globalMinimum << std::endl;
 
 }
 
