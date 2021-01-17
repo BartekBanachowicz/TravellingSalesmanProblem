@@ -17,6 +17,7 @@ void World::reader(std::string fileName)
 	{
 		inputFile >> xID >> xX >> xY;
 		this->pointsMatrix[xID - 1].setCoordinates(xX, xY);
+		this->indexSum += (xID - 1);
 	}
 
 	std::cout << "Poprawnie wczytano dane z pliku" << std::endl;

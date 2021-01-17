@@ -4,16 +4,16 @@
 World::World(int xNumberOfPoints)
 {
 	this->numberOfPoints = xNumberOfPoints;
+	this->indexSum = 0;
 	this->generator();
-	//this->greedyPathFinder();
 }
 
 World::World(std::string fileName)
 {
+	this->indexSum = 0;
 	this->reader(fileName);
 	std::cout << "Poprawnie utworzono swiat" << std::endl;
 	this->readWorld();
-	//this->greedyPathFinder();
 }
 
 World::~World()

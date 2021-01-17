@@ -3,6 +3,8 @@
 #include<cstdlib>
 #include<iostream>
 #include<vector>
+#include<math.h>
+#include<cstdlib>
 
 class AntColony : public Ant
 {
@@ -15,12 +17,15 @@ public:
 
 	AntColony(int xNumberOfAnts, int xNumberOfPoints);
 	void antsSpawning(int xNumberOfPoints, Point* pointsMatrix);
-	int decisionMaking(int antID, int xNumberOfPoints, Point* pointsMatrix);
+	int decisionMaking(int antID, int xNumberOfPoints, Point* pointsMatrix, int alpha, int beta);
 	double getPheromone(int x, int y);
 	int getNumberOfAnts();
-	void makeMove(int antID, int xNumberOfPoints, Point* pointsMatrix);
+	void makeMove(int antID, int xNumberOfPoints, Point* pointsMatrix, int alpha, int beta);
 	double getDistance(int antID);
-	void globalUpdate(int antID, double pathLenght, int xNumberOfPoints);
+	void globalUpdate(int antID, double pathLenght, int xNumberOfPoints, double evaporation);
 	void cleaning(int xNumberOfPoints);
-
+	int getAntIndexSum(int antIndex);
+	int getStartIndex(int antID);
+	int getCurrentIndex(int antID);
+	int getAntPath(int antID, int pointID);
 };

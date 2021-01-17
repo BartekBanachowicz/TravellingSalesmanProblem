@@ -28,6 +28,7 @@ public:
 private:
 	int numberOfPoints;
 	Point* pointsMatrix;
+	int indexSum;
 
 };
 
