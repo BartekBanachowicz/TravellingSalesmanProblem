@@ -83,6 +83,8 @@ int AntColony::decisionMaking(int antID, int xNumberOfPoints, Point *pointsMatri
 		if (this->colony[antID].getAntPathByIndex(i) == 0)
 		{
 			tempValue = pow(this->getPheromone(this->colony[antID].currentPositionID, i), alpha) * pow((1 / this->colony[antID].currentPosition->p2pDistance(pointsMatrix[i])), beta);
+			//tempValue = (this->getPheromone(this->colony[antID].currentPositionID, i) * alpha) + (beta / this->colony[antID].currentPosition->p2pDistance(pointsMatrix[i]));
+			
 			attractivenessArray[i] = tempValue;
 			attractivenessSum += tempValue;
 			
@@ -104,10 +106,10 @@ int AntColony::decisionMaking(int antID, int xNumberOfPoints, Point *pointsMatri
 			probabilitySum += probabilityArray[i];
 		}
 
-		srand(time(0));
+		//srand(time(0));
 		probability = double(rand() % 100) / 100;
 		//probability *= attractivenessSum;
-		//std::cout << "\n\n" << probability;
+		//std::cout << "\n\n"; //<< probability;
 
 		if (probability == 0.0)
 		{
@@ -183,7 +185,7 @@ double AntColony::getDistance(int antID)
 	return this->colony[antID].distance;
 }
 
-void AntColony::globalUpdate(int antID, double pathLenght, int xNumberOfPoints, double evaporation)
+void AntColony::globalUpdate(int antID, double pathLenght, int xNumberOfPoints, double pheromoneEvaporation, double pheromoneSprayingFactor)
 {	
 	
 	double tempPheromone = 0;
@@ -193,8 +195,8 @@ void AntColony::globalUpdate(int antID, double pathLenght, int xNumberOfPoints, 
 	{
 		for (int j = 0; j < xNumberOfPoints; j++)
 		{
-			this->pheromoneMatrix[i][j] *= (1 - evaporation);
-			this->pheromoneMatrix[j][i] *= (1 - evaporation);
+			this->pheromoneMatrix[i][j] *= (1 - pheromoneEvaporation);
+			this->pheromoneMatrix[j][i] *= (1 - pheromoneEvaporation);
 		}
 	}
 
@@ -207,7 +209,7 @@ void AntColony::globalUpdate(int antID, double pathLenght, int xNumberOfPoints, 
 			tempIndexSum += j;
 		}
 
-		tempPheromone = double(1) / this->colony[i].distance;
+		tempPheromone = double(pheromoneSprayingFactor) / this->colony[i].distance;
 
 		for (int j = 1; j <= xNumberOfPoints; j++)
 		{

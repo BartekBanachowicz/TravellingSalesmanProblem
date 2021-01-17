@@ -22,7 +22,7 @@ public:
 	int getNumberOfAnts();
 	void makeMove(int antID, int xNumberOfPoints, Point* pointsMatrix, int alpha, int beta);
 	double getDistance(int antID);
-	void globalUpdate(int antID, double pathLenght, int xNumberOfPoints, double evaporation);
+	void globalUpdate(int antID, double pathLenght, int xNumberOfPoints, double pheromoneEvaporation, double pheromoneSprayingFactor);
 	void cleaning(int xNumberOfPoints);
 	int getAntIndexSum(int antIndex);
 	int getStartIndex(int antID);

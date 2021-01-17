@@ -6,16 +6,17 @@ void World::antPathFinder()
 	double minimum = DBL_MAX, globalMinimum = DBL_MAX;
 	int minimumID = -1;
 
-	int numberOfAnts = 80;
-	int alpha = 11;
-	int beta = 12;
-	double evaporation = 0.2;
+	int numberOfAnts = 60;
+	int alpha = 1;
+	int beta = 11;
+	double pheromoneEvaporation = 0.15;
+	double pheromoneSprayingFactor = 1;
 
 
 	AntColony myColony(numberOfAnts, this->numberOfPoints);
 	myColony.antsSpawning(this->numberOfPoints, this->pointsMatrix);
 
-	for (int i = 0; i < 500; i++)
+	for (int i = 0; i < 3600; i++)
 	{
 		
 		minimum = DBL_MAX;
@@ -74,7 +75,7 @@ void World::antPathFinder()
 			globalMinimum = minimum;
 		}
 
-		myColony.globalUpdate(minimumID, minimum, numberOfPoints, evaporation);
+		myColony.globalUpdate(minimumID, minimum, numberOfPoints, pheromoneEvaporation, pheromoneSprayingFactor);
 		myColony.cleaning(this->numberOfPoints);
 
 	}
