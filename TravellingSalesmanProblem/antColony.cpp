@@ -62,11 +62,9 @@ double AntColony::getPheromone(int x, int y)
 	return this->pheromoneMatrix[x][y];
 }
 
-int AntColony::decisionMaking(int antID, int xNumberOfPoints, Point *pointsMatrix, int alpha, int beta)
+int AntColony::decisionMaking(int antID, int xNumberOfPoints, Point *pointsMatrix, double** distanceMatrix, int alpha, int beta)
 {
 	int newPlaceID = -1;
-	int maxID = 0;
-	double max = 0;
 	double tempValue = 0;
 	double* attractivenessArray = new double[xNumberOfPoints];
 	double* probabilityArray = new double[xNumberOfPoints];
@@ -82,8 +80,7 @@ int AntColony::decisionMaking(int antID, int xNumberOfPoints, Point *pointsMatri
 
 		if (this->colony[antID].getAntPathByIndex(i) == 0)
 		{
-			tempValue = pow(this->getPheromone(this->colony[antID].currentPositionID, i), alpha) * pow((1 / this->colony[antID].currentPosition->p2pDistance(pointsMatrix[i])), beta);
-			//tempValue = (this->getPheromone(this->colony[antID].currentPositionID, i) * alpha) + (beta / this->colony[antID].currentPosition->p2pDistance(pointsMatrix[i]));
+			tempValue = pow(this->getPheromone(this->colony[antID].currentPositionID, i), alpha) * pow((1 / distanceMatrix[colony[antID].currentPositionID][i]), beta);
 			
 			attractivenessArray[i] = tempValue;
 			attractivenessSum += tempValue;
@@ -102,14 +99,10 @@ int AntColony::decisionMaking(int antID, int xNumberOfPoints, Point *pointsMatri
 		for (int i = 0; i < xNumberOfPoints; i++)
 		{
 			probabilityArray[i] = double(attractivenessArray[i]) / double(attractivenessSum);
-			//std::cout << probabilityArray[i] << "\n";
 			probabilitySum += probabilityArray[i];
 		}
 
-		//srand(time(0));
 		probability = double(rand() % 100) / 100;
-		//probability *= attractivenessSum;
-		//std::cout << "\n\n"; //<< probability;
 
 		if (probability == 0.0)
 		{
@@ -145,14 +138,6 @@ int AntColony::decisionMaking(int antID, int xNumberOfPoints, Point *pointsMatri
 	}
 	else
 	{
-		
-		/*std::cout << "\nSciezka: ";
-		for (int i = 0; i < xNumberOfPoints; i++)
-		{
-			std::cout<< this->colony[antID].getAntPathByIndex(i) << " ";
-		}*/
-		
-		
 		newPlaceID = this->colony[antID].startPointID;
 	}
 
@@ -160,8 +145,6 @@ int AntColony::decisionMaking(int antID, int xNumberOfPoints, Point *pointsMatri
 	{
 		std::cout << "Error_decisionMaking\n";
 	}
-
-	//std::cout << " --> " << newPlaceID << std::endl;
 
 	delete[] attractivenessArray;
 	delete[] probabilityArray;
@@ -174,10 +157,10 @@ int AntColony::getNumberOfAnts()
 	return this->numberOfAnts;
 }
 
-void AntColony::makeMove(int antID, int xNumberOfPoints, Point* pointsMatrix, int alpha, int beta)
+void AntColony::makeMove(int antID, int xNumberOfPoints, Point* pointsMatrix, double** distanceMatrix, int alpha, int beta)
 {
-	int newPlaceID = decisionMaking(antID, xNumberOfPoints, pointsMatrix, alpha, beta);
-	this->colony[antID].move(&pointsMatrix[newPlaceID], newPlaceID, this->pheromoneMatrix);
+	int newPlaceID = decisionMaking(antID, xNumberOfPoints, pointsMatrix, distanceMatrix, alpha, beta);
+	this->colony[antID].move(&pointsMatrix[newPlaceID], newPlaceID, this->pheromoneMatrix, distanceMatrix);
 }
 
 double AntColony::getDistance(int antID)
@@ -193,7 +176,7 @@ void AntColony::globalUpdate(int antID, double pathLenght, int xNumberOfPoints, 
 
 	for (int i = 0; i < xNumberOfPoints; i++)
 	{
-		for (int j = 0; j < xNumberOfPoints; j++)
+		for (int j = i; j < xNumberOfPoints; j++)
 		{
 			this->pheromoneMatrix[i][j] *= (1 - pheromoneEvaporation);
 			this->pheromoneMatrix[j][i] *= (1 - pheromoneEvaporation);
@@ -202,12 +185,12 @@ void AntColony::globalUpdate(int antID, double pathLenght, int xNumberOfPoints, 
 
 	for (int i = 0; i < numberOfAnts; i++)
 	{
-		tempIndexSum = 0;
+		/*tempIndexSum = 0;
 
 		for (int j = 0; j < xNumberOfPoints; j++)
 		{
 			tempIndexSum += j;
-		}
+		}*/
 
 		tempPheromone = double(pheromoneSprayingFactor) / this->colony[i].distance;
 

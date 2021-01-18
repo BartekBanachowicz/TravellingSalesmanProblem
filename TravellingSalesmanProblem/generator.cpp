@@ -4,6 +4,7 @@ void World::generator()
 {
 	srand(time(0));
 	int tempX, tempY;
+	double tempDist = 0.0;
 	std::ofstream outputFile;
 	std::string outputFileNameS;
 
@@ -23,6 +24,26 @@ void World::generator()
 		this->indexSum += i;
 
 		outputFile << i+1 << " " << tempX << " " << tempY << std::endl;
+	}
+
+	this->distanceMatix = new double* [this->numberOfPoints];
+	for (int i = 0; i < this->numberOfPoints; i++)
+	{
+		this->distanceMatix[i] = new double[this->numberOfPoints];
+	}
+
+
+	for (int i = 0; i < this->numberOfPoints; i++)
+	{
+		for (int j = i; j < this->numberOfPoints; j++)
+		{
+			if (i != j)
+			{
+				tempDist = this->pointsMatrix[i].p2pDistance(this->pointsMatrix[j]);
+				this->distanceMatix[i][j] = tempDist;
+				this->distanceMatix[j][i] = tempDist;
+			}
+		}
 	}
 
 	outputFile.close();

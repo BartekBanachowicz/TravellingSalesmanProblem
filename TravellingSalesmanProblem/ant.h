@@ -15,7 +15,7 @@ public:
 	Ant(int xNumberOfPoints);
 	//~Ant();
 	Point* currentPosition;
-	void move(Point* newPlace, int newPlaceID, double** pheromoneMatrix);
+	void move(Point* newPlace, int newPlaceID, double** pheromoneMatrix, double** distanceMatrix);
 	void setAntIndexSum(int number);
 	int getAntIndexSum();
 	int currentStage;

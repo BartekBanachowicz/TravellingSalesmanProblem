@@ -38,7 +38,7 @@ void World::antPathFinder(int xNumberOfAnts, int xAlpha, int xBeta, double xPher
 		{
 			for (int k = 0; k < myColony.getNumberOfAnts(); k++)
 			{
-				myColony.makeMove(k, this->numberOfPoints, this->pointsMatrix, alpha, beta);
+				myColony.makeMove(k, this->numberOfPoints, this->pointsMatrix, this->distanceMatix, alpha, beta);
 			}
 		}
 
@@ -47,10 +47,10 @@ void World::antPathFinder(int xNumberOfAnts, int xAlpha, int xBeta, double xPher
 			//std::cout << "\nDistance mrowka " << j << ": " << myColony.getDistance(j);
 			
 			//if(true)
-			if ((myColony.getAntIndexSum(j) != this->indexSum) && (myColony.getCurrentIndex(j) != myColony.getStartIndex(j)))
+			/*if ((myColony.getAntIndexSum(j) != this->indexSum) && (myColony.getCurrentIndex(j) != myColony.getStartIndex(j)))
 			{
 				std::cout << "\n---\nError: " << myColony.getAntIndexSum(j) << ", instead of: "<<this->indexSum<<" index: "<<myColony.getStartIndex(j)<<"\n";
-			}
+			}*/
 			
 			
 			

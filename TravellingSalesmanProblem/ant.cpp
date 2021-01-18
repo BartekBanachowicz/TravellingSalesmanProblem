@@ -31,10 +31,11 @@ Ant::Ant()
 	antPathInOrder = nullptr;
 }
 
-void Ant::move(Point* newPlace, int newPlaceID, double** pheromoneMatrix)
+void Ant::move(Point* newPlace, int newPlaceID, double** pheromoneMatrix, double** distanceMatrix)
 {
 
-	this->distance += this->currentPosition->p2pDistance(*newPlace);
+	//this->distance += this->currentPosition->p2pDistance(*newPlace);
+	this->distance += distanceMatrix[this->currentPositionID][newPlaceID];
 
 	this->currentPosition = newPlace;
 	this->currentStage++;

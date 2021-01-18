@@ -33,6 +33,7 @@ private:
 	Point* pointsMatrix;
 	int indexSum;
 	std::ofstream outputFile;
+	double** distanceMatix;
 
 };
 

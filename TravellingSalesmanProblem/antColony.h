@@ -17,10 +17,10 @@ public:
 
 	AntColony(int xNumberOfAnts, int xNumberOfPoints);
 	void antsSpawning(int xNumberOfPoints, Point* pointsMatrix);
-	int decisionMaking(int antID, int xNumberOfPoints, Point* pointsMatrix, int alpha, int beta);
+	int decisionMaking(int antID, int xNumberOfPoints, Point* pointsMatrix, double** distanceMatrix, int alpha, int beta);
 	double getPheromone(int x, int y);
 	int getNumberOfAnts();
-	void makeMove(int antID, int xNumberOfPoints, Point* pointsMatrix, int alpha, int beta);
+	void makeMove(int antID, int xNumberOfPoints, Point* pointsMatrix, double** distanceMatrix, int alpha, int beta);
 	double getDistance(int antID);
 	void globalUpdate(int antID, double pathLenght, int xNumberOfPoints, double pheromoneEvaporation, double pheromoneSprayingFactor);
 	void cleaning(int xNumberOfPoints);
