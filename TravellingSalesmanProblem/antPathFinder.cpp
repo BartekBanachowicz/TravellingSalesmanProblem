@@ -1,22 +1,32 @@
 #include"World.h"
 
-void World::antPathFinder()
+void World::antPathFinder(int xNumberOfAnts, int xAlpha, int xBeta, double xPheromoneEvaporation, double xPheromoneSprayingFactor)
 {
 	
 	double minimum = DBL_MAX, globalMinimum = DBL_MAX;
 	int minimumID = -1;
 
-	int numberOfAnts = 60;
+	/*int numberOfAnts = 60;
 	int alpha = 1;
 	int beta = 11;
 	double pheromoneEvaporation = 0.15;
-	double pheromoneSprayingFactor = 1;
+	double pheromoneSprayingFactor = 1;*/
 
+	int numberOfAnts = xNumberOfAnts;
+	int alpha = xAlpha;
+	int beta = xBeta;
+	double pheromoneEvaporation = xPheromoneEvaporation;
+	double pheromoneSprayingFactor = xPheromoneSprayingFactor;
 
 	AntColony myColony(numberOfAnts, this->numberOfPoints);
 	myColony.antsSpawning(this->numberOfPoints, this->pointsMatrix);
 
-	for (int i = 0; i < 3600; i++)
+	std::chrono::duration<double> elapsed;
+	double time = 0;
+	auto finish = std::chrono::high_resolution_clock::now();
+	auto start = std::chrono::high_resolution_clock::now();
+
+	for (int i = 0; i < 250; i++)
 	{
 		
 		minimum = DBL_MAX;
@@ -80,7 +90,14 @@ void World::antPathFinder()
 
 	}
 
-	std::cout << "\n\nGlobal minimum: " << globalMinimum << std::endl;
+	finish = std::chrono::high_resolution_clock::now();
+	elapsed = finish - start;
+	time = elapsed.count();
+
+	//myColony.antCleaning();
+
+	//this->outputFile << numberOfAnts << ";" << alpha << ";" << beta << ";" << pheromoneEvaporation << ";" << pheromoneSprayingFactor << ";" << time <<";"<<globalMinimum << std::endl;
+	std::cout << "\n\nGlobal minimum: " << globalMinimum <<" time: "<<time<<std::endl;
 
 }
 

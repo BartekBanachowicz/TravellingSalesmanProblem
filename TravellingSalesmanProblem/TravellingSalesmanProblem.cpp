@@ -7,8 +7,16 @@
 int main()
 {
     std::cout << "Welcome in TSP\n";
+    
+    //Tworzenie swiata
+    
     //World firstWorld(10);
-    World firstWorld("bier127.txt");
+    World firstWorld("tsp250.txt");
+    
+    
+    //Szukanie rozwiazania
+
     //firstWorld.greedyPathFinder();
-    firstWorld.antPathFinder();
+    firstWorld.antPathFinder(150, 1, 10, 0.15, 1);
+    
 }

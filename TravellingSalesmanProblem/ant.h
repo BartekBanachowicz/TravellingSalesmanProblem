@@ -13,7 +13,7 @@ private:
 public:
 	Ant();
 	Ant(int xNumberOfPoints);
-	~Ant();
+	//~Ant();
 	Point* currentPosition;
 	void move(Point* newPlace, int newPlaceID, double** pheromoneMatrix);
 	void setAntIndexSum(int number);

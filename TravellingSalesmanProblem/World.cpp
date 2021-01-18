@@ -40,3 +40,13 @@ int World::readNumberOfPoints()
 {
 	return this->numberOfPoints;
 }
+
+void World::openOutputFile(std::string fileName)
+{
+	this->outputFile.open(fileName);
+}
+
+void World::closeOutputFile()
+{
+	this->outputFile.close();
+}

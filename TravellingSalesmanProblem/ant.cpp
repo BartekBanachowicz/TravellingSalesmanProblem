@@ -31,12 +31,6 @@ Ant::Ant()
 	antPathInOrder = nullptr;
 }
 
-Ant::~Ant()
-{
-	/*delete[] antPathByIndex;
-	delete[] antPathInOrder;*/
-}
-
 void Ant::move(Point* newPlace, int newPlaceID, double** pheromoneMatrix)
 {
 

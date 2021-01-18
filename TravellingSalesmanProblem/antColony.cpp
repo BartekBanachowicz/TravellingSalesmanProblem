@@ -41,7 +41,7 @@ void AntColony::antsSpawning(int xNumberOfPoints, Point* pointsMatrix)
 			this->colony[antPointer].currentPosition = &pointsMatrix[pointsPointer];
 			this->colony[antPointer].currentPositionID = pointsPointer;
 			this->colony[antPointer].startPointID = pointsPointer;
-			std::cout << colony[antPointer].currentPosition->readCoordinatesX() << " " << colony[antPointer].currentPosition->readCoordinatesY() << std::endl;
+			//std::cout << colony[antPointer].currentPosition->readCoordinatesX() << " " << colony[antPointer].currentPosition->readCoordinatesY() << std::endl;
 			this->colony[antPointer].setAntIndexSum(pointsPointer);
 			this->colony[antPointer].setAntPathInOrder(0, pointsPointer);
 			this->colony[antPointer].setAntPathByIndex(pointsPointer, 1);
@@ -53,7 +53,7 @@ void AntColony::antsSpawning(int xNumberOfPoints, Point* pointsMatrix)
 
 	}
 	
-	std::cout << antPointer<<std::endl;
+	//std::cout << antPointer<<std::endl;
 
 }
 
@@ -256,4 +256,10 @@ int AntColony::getAntPath(int antID, int pointID)
 int AntColony::getCurrentIndex(int antID)
 {
 	return this->colony[antID].currentPositionID;
+}
+
+void AntColony::antCleaning()
+{
+	colony.clear();
+	colony.shrink_to_fit();
 }

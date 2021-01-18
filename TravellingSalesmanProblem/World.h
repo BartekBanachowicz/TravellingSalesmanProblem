@@ -7,6 +7,7 @@
 #include<fstream>
 #include<iostream>
 #include <limits>
+#include<chrono>
 
 class World
 {
@@ -20,15 +21,18 @@ public:
 	void generator();
 	void reader(std::string fileName);
 	void greedyPathFinder();
-	void antPathFinder();
+	void antPathFinder(int xNumberOfAnts, int xAlpha, int xBeta, double xPheromoneEvaporation, double xPheromoneSprayingFactor);
 	void createPointsMatrix();
 	void readWorld();
+	void openOutputFile(std::string fileName);
+	void closeOutputFile();
 	int readNumberOfPoints();
 
 private:
 	int numberOfPoints;
 	Point* pointsMatrix;
 	int indexSum;
+	std::ofstream outputFile;
 
 };
 

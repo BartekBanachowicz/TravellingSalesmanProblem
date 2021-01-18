@@ -28,4 +28,5 @@ public:
 	int getStartIndex(int antID);
 	int getCurrentIndex(int antID);
 	int getAntPath(int antID, int pointID);
+	void antCleaning();
 };
