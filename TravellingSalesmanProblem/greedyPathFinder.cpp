@@ -5,7 +5,7 @@
 void World::greedyPathFinder()
 {
 	double shortestTotal = DBL_MAX;
-	for (int h = 0; h < this->numberOfPoints; h++)
+	for (int h = 0; h < 1; h++)
 	{
 		//std::cout << "\nStarting with point no " << h + 1 << std::endl;
 		//std::cout << "Greedy path found:\n";
