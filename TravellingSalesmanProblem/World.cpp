@@ -1,19 +1,19 @@
 #include "World.h"
 
 
-World::World(int xNumberOfPoints)
+World::World(int xNumberOfPoints, int locationRange)
 {
 	this->numberOfPoints = xNumberOfPoints;
-	this->generator();
-	//this->greedyPathFinder();
+	this->indexSum = 0;
+	this->generator(locationRange);
 }
 
 World::World(std::string fileName)
 {
+	this->indexSum = 0;
 	this->reader(fileName);
 	std::cout << "Poprawnie utworzono swiat" << std::endl;
 	this->readWorld();
-	//this->greedyPathFinder();
 }
 
 World::~World()
@@ -39,4 +39,14 @@ void World::readWorld()
 int World::readNumberOfPoints()
 {
 	return this->numberOfPoints;
+}
+
+void World::openOutputFile(std::string fileName)
+{
+	this->outputFile.open(fileName);
+}
+
+void World::closeOutputFile()
+{
+	this->outputFile.close();
 }
