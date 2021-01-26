@@ -3,83 +3,48 @@
 
 Ant::Ant(int xNumberOfPoints)
 {
-	antIndexSum = 0;
 	currentPosition = nullptr;
-	antPathByIndex = new int[xNumberOfPoints];
-	antPathInOrder = new int[xNumberOfPoints + 1];
-	currentStage = 0;
+	currentStage = 1;
 	currentPositionID = -2;
 	startPointID = -2;
 	distance = 0;
-	
-	for (int i = 0; i <= xNumberOfPoints; i++)
+	antPath = new int[xNumberOfPoints];
+	for (int i = 0; i < xNumberOfPoints; i++)
 	{
-		if(i < xNumberOfPoints) antPathByIndex[i] = 0;
-		antPathInOrder[i] = 0;
+		antPath[i] = 0;
+		//std::cout << i << " ";
 	}
 }
 
 Ant::Ant()
 {
-	antIndexSum = 0;
 	currentPosition = nullptr;
-	currentStage = 0;
-	currentPositionID = -2;
-	startPointID = -2;
 	distance = 0;
-	antPathByIndex = nullptr;
-	antPathInOrder = nullptr;
 }
 
-void Ant::move(Point* newPlace, int newPlaceID, double** pheromoneMatrix, double** distanceMatrix)
+void Ant::move(Point* newPlace, int newPlaceID, double** pheromoneMatrix)
 {
+	double Tau0 = 1.0;
+	double alpha = 0.1;
+	double newPheromone;
 
-	//this->distance += this->currentPosition->p2pDistance(*newPlace);
-	this->distance += distanceMatrix[this->currentPositionID][newPlaceID];
+	this->distance += this->currentPosition->p2pDistance(*newPlace);
 
 	this->currentPosition = newPlace;
 	this->currentStage++;
+	this->antPath[newPlaceID] = this->currentStage;
 	
+
+	newPheromone = ((1 - alpha) * pheromoneMatrix[this->currentPositionID][newPlaceID]) + (alpha * Tau0);
+	pheromoneMatrix[this->currentPositionID][newPlaceID] = newPheromone;
+	pheromoneMatrix[newPlaceID][this->currentPositionID] = newPheromone;
+
+
 	this->currentPositionID = newPlaceID;
-
-	this->antIndexSum += newPlaceID;
-
-	//new
-	this->antPathByIndex[newPlaceID] = 1;
-	this->antPathInOrder[currentStage] = newPlaceID;
 }
 
-void Ant::setAntIndexSum(int number)
+int Ant::getAntPath(int ID)
 {
-	this->antIndexSum = number;
-}
-
-int Ant::getAntIndexSum()
-{
-	return this->antIndexSum;
-}
-
-void Ant::setAntPathByIndex(int ID, int number)
-{
-	this->antPathByIndex[ID] = number;
-}
-
-void Ant::setAntPathInOrder(int ID, int number)
-{
-	this->antPathInOrder[ID] = number;
-}
-
-int Ant::getAntPathByIndex(int ID)
-{
-	return this->antPathByIndex[ID];
-}
-
-int Ant::getAntPathInOrder(int ID)
-{
-	return this->antPathInOrder[ID];
-}
-
-int* Ant::getAntPathInOrderWhole()
-{
-	return this->antPathInOrder;
+	//std::cout<<"Done\n";
+	return this->antPath[ID];
 }

@@ -4,28 +4,17 @@
 
 class Ant
 {
-
-private:
-	int antIndexSum;
-	int* antPathByIndex;
-	int* antPathInOrder;
 	
 public:
 	Ant();
 	Ant(int xNumberOfPoints);
-	//~Ant();
 	Point* currentPosition;
-	void move(Point* newPlace, int newPlaceID, double** pheromoneMatrix, double** distanceMatrix);
-	void setAntIndexSum(int number);
-	int getAntIndexSum();
+	void move(Point* newPlace, int newPlaceID, double** pheromoneMatrix);
+	int* antPath;
 	int currentStage;
 	int currentPositionID;
+	int getAntPath(int ID);
 	int startPointID;
 	double distance;
-	void setAntPathByIndex(int ID, int number);
-	void setAntPathInOrder(int ID, int number);
-	int getAntPathByIndex(int ID);
-	int getAntPathInOrder(int ID);
-	int* getAntPathInOrderWhole();
 
 };
