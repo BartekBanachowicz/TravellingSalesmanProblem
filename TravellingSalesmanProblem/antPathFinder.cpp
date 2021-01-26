@@ -1,6 +1,6 @@
 #include"World.h"
 
-void World::antPathFinder(int xNumberOfAnts, int xAlpha, int xBeta, double xPheromoneEvaporation, double xPheromoneSprayingFactor)
+void World::antPathFinder(int xNumberOfAnts, int xAlpha, int xBeta, double xPheromoneEvaporation, double xPheromoneSprayingFactor, int xIterations)
 {
 	
 	double minimum = DBL_MAX, globalMinimum = DBL_MAX;
@@ -17,6 +17,9 @@ void World::antPathFinder(int xNumberOfAnts, int xAlpha, int xBeta, double xPher
 	int beta = xBeta;
 	double pheromoneEvaporation = xPheromoneEvaporation;
 	double pheromoneSprayingFactor = xPheromoneSprayingFactor;
+	int iterations = xIterations;
+
+	int* path = new int[this->numberOfPoints+1];
 
 	AntColony myColony(numberOfAnts, this->numberOfPoints);
 	myColony.antsSpawning(this->numberOfPoints, this->pointsMatrix);
@@ -26,7 +29,7 @@ void World::antPathFinder(int xNumberOfAnts, int xAlpha, int xBeta, double xPher
 	auto finish = std::chrono::high_resolution_clock::now();
 	auto start = std::chrono::high_resolution_clock::now();
 
-	for (int i = 0; i < 250; i++)
+	for (int i = 0; i < iterations; i++)
 	{
 		
 		minimum = DBL_MAX;
@@ -78,17 +81,35 @@ void World::antPathFinder(int xNumberOfAnts, int xAlpha, int xBeta, double xPher
 			}
 		}
 
-		//std::cout << "\nShortest path: " << minimum << " for ant: " << minimumID << std::endl;
+		/*if (true)
+		{
+			std::cout << "\nShortest path: " << minimum << " for ant: " << minimumID;
+
+			for (int j = 0; j < this->numberOfPoints; j++)
+			{
+				std::cout << " " << myColony.getAntPath(minimumID, j);
+			}
+
+			std::cout << std::endl;
+		}*/
 
 		if (minimum < globalMinimum)
 		{
 			globalMinimum = minimum;
+			for (int j = 0; j < this->numberOfPoints + 1; j++)
+			{
+				path[j] = myColony.getAntPath(minimumID, j);
+			}
+			
+			
 		}
 
 		myColony.globalUpdate(minimumID, minimum, numberOfPoints, pheromoneEvaporation, pheromoneSprayingFactor);
 		myColony.cleaning(this->numberOfPoints);
 
 	}
+
+	
 
 	finish = std::chrono::high_resolution_clock::now();
 	elapsed = finish - start;
@@ -98,6 +119,18 @@ void World::antPathFinder(int xNumberOfAnts, int xAlpha, int xBeta, double xPher
 
 	//this->outputFile << numberOfAnts << ";" << alpha << ";" << beta << ";" << pheromoneEvaporation << ";" << pheromoneSprayingFactor << ";" << time <<";"<<globalMinimum << std::endl;
 	std::cout << "\n\nGlobal minimum: " << globalMinimum <<" time: "<<time<<std::endl;
+
+	std::ofstream outputFile;
+	outputFile.open("outputVis.txt");
+
+	for (int i = 1; i < this->numberOfPoints + 1; i++)
+	{
+		outputFile << path[i-1]+1 << " " << path[i]+1<<"\n";
+	}
+
+	outputFile.close();
+
+	delete[] path;
 
 }
 

@@ -1,6 +1,6 @@
 #include"World.h"
 
-void World::generator()
+void World::generator(int locationRange)
 {
 	srand(time(0));
 	int tempX, tempY;
@@ -18,8 +18,8 @@ void World::generator()
 
 	for (int i = 0; i < this->numberOfPoints; i++)
 	{
-		tempX = rand() % 500;
-		tempY = rand() % 500;
+		tempX = rand() % locationRange;
+		tempY = rand() % locationRange;
 		this->pointsMatrix[i].setCoordinates(tempX, tempY);
 		this->indexSum += i;
 

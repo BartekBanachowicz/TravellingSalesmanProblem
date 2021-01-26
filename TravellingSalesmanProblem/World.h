@@ -14,14 +14,14 @@ class World
 
 public:
 
-	World(int xNumberOfPoints);
+	World(int xNumberOfPoints, int locationRange);
 	World(std::string fileName);
 	~World();
 
-	void generator();
+	void generator(int locationRange);
 	void reader(std::string fileName);
 	void greedyPathFinder();
-	void antPathFinder(int xNumberOfAnts, int xAlpha, int xBeta, double xPheromoneEvaporation, double xPheromoneSprayingFactor);
+	void antPathFinder(int xNumberOfAnts, int xAlpha, int xBeta, double xPheromoneEvaporation, double xPheromoneSprayingFactor, int xIterations);
 	void createPointsMatrix();
 	void readWorld();
 	void openOutputFile(std::string fileName);

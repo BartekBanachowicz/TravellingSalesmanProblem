@@ -1,11 +1,11 @@
 #include "World.h"
 
 
-World::World(int xNumberOfPoints)
+World::World(int xNumberOfPoints, int locationRange)
 {
 	this->numberOfPoints = xNumberOfPoints;
 	this->indexSum = 0;
-	this->generator();
+	this->generator(locationRange);
 }
 
 World::World(std::string fileName)

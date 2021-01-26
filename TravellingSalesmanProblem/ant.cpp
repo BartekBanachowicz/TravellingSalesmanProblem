@@ -78,3 +78,8 @@ int Ant::getAntPathInOrder(int ID)
 {
 	return this->antPathInOrder[ID];
 }
+
+int* Ant::getAntPathInOrderWhole()
+{
+	return this->antPathInOrder;
+}

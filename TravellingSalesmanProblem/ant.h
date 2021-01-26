@@ -26,5 +26,6 @@ public:
 	void setAntPathInOrder(int ID, int number);
 	int getAntPathByIndex(int ID);
 	int getAntPathInOrder(int ID);
+	int* getAntPathInOrderWhole();
 
 };

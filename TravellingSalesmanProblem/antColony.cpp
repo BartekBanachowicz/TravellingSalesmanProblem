@@ -236,6 +236,11 @@ int AntColony::getAntPath(int antID, int pointID)
 	return this->colony[antID].getAntPathInOrder(pointID);
 }
 
+int* AntColony::getAntPathInOrderWhole(int antID)
+{
+	return this->colony[antID].getAntPathInOrderWhole();
+}
+
 int AntColony::getCurrentIndex(int antID)
 {
 	return this->colony[antID].currentPositionID;
